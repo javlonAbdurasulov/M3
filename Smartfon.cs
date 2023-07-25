@@ -36,7 +36,7 @@ namespace M3_Examen
 
         public static async Task Creat(List<Smartfon> smartfons,string name, int year, decimal priceDol, int Count=0)
         {
-            await Task.Delay(10000);
+            
             smartfons.Add(new Smartfon { Name = name,Year = year,PriceDol = priceDol,Count = Count});
             Console.WriteLine("complite");
             Delegates.CreateDB.Invoke(MyException.writeFile, MyException.sendSmsTelegram);

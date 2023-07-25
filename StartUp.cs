@@ -26,7 +26,7 @@ namespace M3_Examen
             {
                 case 1:
                     {
-                        menu1(users);
+                        Create(users);
                     }
                     break;
                 case 2:
@@ -38,20 +38,13 @@ namespace M3_Examen
                 case 3:
                     {
                         //
-                        Console.WriteLine("Update qilsangiz -> (count 0 teglashtiriladi)");
-                        Console.WriteLine("Qaysi smartfonni update qilas? : ");
-                        string name = Console.ReadLine();
-                        Console.WriteLine("yangi price?: ");
-                        int price = Convert.ToInt32(Console.ReadLine());
-                        Delegates.Update.Invoke(users.ProductsInStore, name, price);
+                        Update(users);
 
                     }
                     break;
                 case 4:
                     {
-                        Console.WriteLine("Name smartfon kiriting:");
-                        string name = Console.ReadLine();
-                        users.ProductsInStore =  Smartfon.Delete(users.ProductsInStore, name);
+                        Delete(users);
                     }
                     break;
                 case 5:
@@ -70,14 +63,36 @@ namespace M3_Examen
 
 
         }
-        public static async Task menu1(Users users)
+
+        private static async Task Delete(Users users)
+        {
+            Console.WriteLine("Name smartfon kiriting:");
+            string name = Console.ReadLine();
+            await Task.Delay(10000);
+            users.ProductsInStore = Smartfon.Delete(users.ProductsInStore, name);
+        }
+
+        private static async Task Update(Users users)
+        {
+            Console.WriteLine("Update qilsangiz -> (count 0 teglashtiriladi)");
+            Console.WriteLine("Qaysi smartfonni update qilas? : ");
+            string name = Console.ReadLine();
+            Console.WriteLine("yangi price?: ");
+            int price = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("update run");
+            await Task.Delay(10000);
+            Delegates.Update.Invoke(users.ProductsInStore, name, price);
+        }
+
+        public static async Task Create(Users users)
         {
             PrintCreate();
             string name = Console.ReadLine();
             int year = int.Parse(Console.ReadLine());
             decimal price = Convert.ToDecimal(Console.ReadLine());
             //chunki uzgartirish kirsa saytda xam xam userni ekranida (users.ProductsInStore) list uzgarish kerak
-            await Console.Out.WriteLineAsync("create run!");
+            Console.WriteLine("create run!");
+            await Task.Delay(10000);
             Delegates.Create.Invoke(users.ProductsInStore, name, year, price);
         }
         public static void printMenu() 
